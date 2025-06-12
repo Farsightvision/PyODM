@@ -214,7 +214,7 @@ class Node:
         return self.compare_version(node_version, version) >= 0
 
 
-    def create_task(self, files, options={}, name=None, progress_callback=None, skip_post_processing=False, webhook=None, outputs=[], parallel_uploads=10, max_retries=5, retry_timeout=5, task_uuid=None):
+    def create_task(self, files, options={}, name=None, progress_callback=None, skip_post_processing=False, webhook=None, webhook_started=None, outputs=[], parallel_uploads=10, max_retries=5, retry_timeout=5, task_uuid=None):
         """Start processing a new task.
         At a minimum you need to pass a list of image paths. All other parameters are optional.
 
@@ -262,6 +262,9 @@ class Node:
         
         if webhook is not None:
             fields['webhook'] = webhook
+
+        if webhook_started is not None:
+            fields['webhookStarted'] = webhook_started
 
         if outputs:
             fields['outputs'] = json.dumps(outputs)
